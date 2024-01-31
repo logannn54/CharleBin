@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="My first PHPMD rule set"
+<ruleset name="My custom PHPMD rule set"
          xmlns="http://pmd.sf.net/ruleset/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
@@ -9,8 +9,11 @@
     <description>
         My custom rule set that checks my code...
     </description>
+
+    <!-- Import the entire unused code rule set -->
     <rule ref="rulesets/unusedcode.xml" />
-    
+
+    <!-- Custom Rule: BooleanArgumentFlag -->
     <rule name="BooleanArgumentFlag" since="1.4.0">
         <example>
             <![CDATA[
@@ -21,5 +24,34 @@
             ]]>
         </example>
     </rule>
-    
+
+    <!-- Custom Rule: ElseExpression -->
+    <rule name="ElseExpression" since="1.4.0">
+        <example>
+            <![CDATA[
+            class Foo {
+                public function bar($flag) {
+                    if ($flag) {
+                        // one branch
+                    } else {
+                        // another branch
+                    }
+                }
+            }
+            ]]>
+        </example>
+    </rule>
+
+    <!-- Custom Rule: StaticAccess -->
+    <rule name="StaticAccess" since="1.4.0">
+        <example>
+            <![CDATA[
+            class Foo {
+                public function bar() {
+                    Bar::baz();
+                }
+            }
+            ]]>
+        </example>
+    </rule>
 </ruleset>
